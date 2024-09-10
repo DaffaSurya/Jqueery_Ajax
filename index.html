@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        <h1 id="teks">Jquery dan J Ajax</h1>
+        <p id="p1">Surabaya</p>
+        <button>Tekan disini</button>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('button').click(function() {
+                $('#p1').load('aksara.txt ', function(responseTXT , StatusTXT) {
+                     if(StatusTXT == "success") {
+                        alert(
+                            "External load Succesfully"  // menggunakan conditional untuk memunculkan StatusTXT sebagai pemberitahuan bahwa 
+                                                        // button berhasil dijalankan
+                        )
+                     } else {
+                        alert('External load warning')  // menggunakan else dalam conditional ketika ada dua kondisi.
+                     }
+                });  // load dalam sebuah perintah ajax berguna untuk memproses pergantian data menggunakan file txt.
+            })
+        })
+
+        $.ajax({
+            url: 'https://api.example.com/data',
+            type: 'GET', // atau "POST"
+            dataType: 'json',  // format data yang diharapkan dari server
+            success: function(data) {
+                console.log(data) // apa yang dilakukan saat permintaan sukses
+            },
+            error: function(error) {
+                console.log('Terjadi Kesalahan', error) // penanganan kesalahan
+            }
+        })
+
+        $.get('https://api.example.com/data', function(data) { // yang berfungsi untuk menyederhanakan proses pengiriman data menggunakan permintaan HTTP request
+                console.log(data);});
+
+        $.post('https://api.example.com/submit', {name: 'john', age: 30} , function(response) { // mengirim data ke server menggunakan permintaan post HTTP server
+            console.log(data);
+        });
+
+        $.getJSON('https://api.example.com/data.JSON', function(data) {
+            console.log(data);
+        });
+
+        $('result').load('http://example.com/page.html'); // memproses hasil atau result untuk ditampilkan pada page html
+    </script>
+</body>
+</html> 
